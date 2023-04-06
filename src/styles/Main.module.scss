@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+@import "../styles/Variables.module.scss";
+
+* {
+  box-sizing: border-box;
+  font-size: 10px;
+  color: $white;
+  font-family: "Fira Code", monospace;
+}
+
+body {
+  background: $midnight-blue;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $midnight-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $purple-heart;
+}
+
+
+.header {
+  min-height: 100px;
+  padding: 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 15px;
+  background: linear-gradient(45deg, #01306e 25%, transparent 25%),
+    linear-gradient(-45deg, #01306e 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #01306e 75%),
+    linear-gradient(-45deg, transparent 75%, #01306e 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  margin-bottom: 50px;
+  .title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: $white;
+    background-color: $black;
+  }
+}
+
+.main {
+  padding: 0 4%;
+  & .projectsTitle{
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: inline-block;
+    background: $black;
+    text-align: center;
+    width: 100%;
+    border: 1px solid $purple-heart;
+  }
+  
+  & .projectContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    & .project {
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid $purple-heart;
+      padding: 10px;
+      row-gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      & .specification {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 1rem;
+      }
+      & .name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: capitalize;
+        color: $mint-green;
+        min-height: 40px;
+      }
+      & button {
+        border: 0;
+        padding: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+
+      & .viewProject {
+        background-color: $eletric-indigo;
+      }
+
+      & .viewRepo {
+        background-color: $purple-heart;
+      }
+
+      & .languages {
+        grid-column: 1/-1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: 25px;
+        margin-top: 0.5rem;
+        & .language {
+          padding: 5px;
+          border-radius: 10px;
+          font-weight: 700;
+          margin-right: 10px;
+          margin-top: 0.7rem;
+        }
+      }
+      & .description {
+        font-size: 1.1rem;
+        color: $white;
+        margin: 5px 0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .projectContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projectContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.footer {
+  padding: 0 40px;
+  background: $black;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  & p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+  }
+}
