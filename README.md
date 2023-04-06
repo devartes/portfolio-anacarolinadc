@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my personal portfolio website, built with React and TypeScript. It includes my resume, projects, and contact information.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- React
+- TypeScript
+- CSS Modules
+- SCSS
 
-### `yarn start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To get started, clone the repository and install the dependencies:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+```console
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git clone git@github.com:devartes/portfolio-anacarolinadc.git
 
-### `yarn build`
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```console
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cd portfolio-anacarolinadc
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `yarn eject`
+```console
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+npm install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##Then, start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```console
 
-## Learn More
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The development server will run at [http://localhost:3000](http://localhost:3000).
+
+##Building for Production
+To build the production version of the website, run:
+
+```console
+
+npm run build
+
+```
+The compiled website will be in the build folder.
+
+Contributing
+Contributions are welcome! If you find a bug or would like to suggest a new feature, please open an issue.
+
+If you would like to contribute code, please fork the repository and create a new branch for your feature or bug fix. When you are ready to submit your changes, create a pull request.
+
+License
+This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/devartes/portfolio-anacarolinadc/blob/master/LICENSE) file for details.
