@@ -1,0 +1,21 @@
+.aboutMe{
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid $purple-heart;
+    background: $black;
+    .myName {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $white;
+        margin-top: 0;
+    }
+    .profession{
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $shade-of-cyan;
+    }
+    .icons {
+        display: flex;
+        column-gap: 20px;
+    }
+}
