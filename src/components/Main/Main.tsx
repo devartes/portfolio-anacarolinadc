@@ -30,6 +30,7 @@ const languageColors: LanguageColors = {
   Shell: "#50c10a",
   PHP: "#4F5D95",
   SCSS: "#c6538c",
+  Vue: "#33a06f",
 };
 
 const Main: React.FC<Props> = ({ githubUsername }) => {
