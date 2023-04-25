@@ -7,6 +7,9 @@
   font-size: 10px;
   color: $white;
   font-family: "Fira Code", monospace;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 }
 
 body {
@@ -36,7 +39,6 @@ body {
   background-color: $purple-heart;
 }
 
-
 .header {
   min-height: 100px;
   padding: 10px 0 10px;
@@ -61,47 +63,84 @@ body {
 
 .main {
   padding: 0 4%;
-  & .projectsTitle{
+  & .projectsTitle {
     font-size: 1.8rem;
     font-weight: 700;
-    display: inline-block;
-    background: $black;
     text-align: center;
     width: 100%;
-    border: 1px solid $purple-heart;
   }
-  
+
   & .projectContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     & .project {
       width: 100%;
-      min-height: 150px;
       border: 1px solid $purple-heart;
       padding: 10px;
       row-gap: 1rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 1/1;
+      @media (max-width: 768px) {
+        aspect-ratio: unset;
+      }
       & .specification {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        row-gap: 1rem;
+        row-gap: 1.5rem;
+        @media (max-width: 768px) {
+          row-gap: 2rem;
+        }
+        & .specificationPreview {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
       }
       & .name {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         font-weight: 700;
         text-transform: capitalize;
         color: $mint-green;
-        min-height: 40px;
+        margin: 0;
+        text-align: center;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @media (max-width: 768px) {
+          white-space: pre-wrap;
+          font-size: 1.2rem;
+        }
       }
       & button {
         border: 0;
-        padding: 10px;
-        font-weight: 700;
-        font-size: 1.1rem;
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
         cursor: pointer;
+        @media (max-width: 768px) {
+          width: 40px;
+          height: 40px;
+        }
+        & img {
+          background-color: $white;
+          background-size: 15px 15px;
+          border-radius: 100%;
+          width: 25px;
+          height: 25px;
+          @media (max-width: 768px) {
+            width: 30px;
+            height: 30px;
+          }
+        }
       }
 
       & .viewProject {
@@ -117,20 +156,33 @@ body {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        justify-content: center;
         min-height: 25px;
-        margin-top: 0.5rem;
-        & .language {
-          padding: 5px;
-          border-radius: 10px;
+        .language {
+          padding: 3px;
+          border-radius: 5px;
           font-weight: 700;
-          margin-right: 10px;
+          margin-right: 5px;
           margin-top: 0.7rem;
+          box-shadow: inset 0 -10px 10px -10px rgba(255, 255, 255, 0.5);
         }
       }
-      & .description {
-        font-size: 1.1rem;
+      .description {
+        font-size: 1rem;
         color: $white;
         margin: 5px 0;
+        line-height: 1.4;
+        height: calc(1.4 * 4 * 10px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        font-weight: 600;
+        @media (max-width: 768px) {
+          min-height: calc(1.4 * 4 * 11px);
+          height: auto;
+        }
       }
     }
   }
@@ -160,7 +212,7 @@ body {
   justify-content: center;
   margin-top: 50px;
   & p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     display: flex;
   }
