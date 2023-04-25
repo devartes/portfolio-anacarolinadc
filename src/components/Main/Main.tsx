@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import AboutMe from "../AboutMe/AboutMe";
 import styles from "../../styles/Global.module.scss";
 
 interface Project {
@@ -35,7 +34,8 @@ const languageColors: LanguageColors = {
 
 const Main: React.FC<Props> = ({ githubUsername }) => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<Project[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -63,7 +63,6 @@ const Main: React.FC<Props> = ({ githubUsername }) => {
         }));
 
       const allRepos = [...myRepos, ...orgReposWithHomepage];
-
       const previewProjects: Project[] = allRepos
         .filter((repo: any) => repo.homepage)
         .map((repo: any) => ({
@@ -88,78 +87,110 @@ const Main: React.FC<Props> = ({ githubUsername }) => {
     fetchData();
   }, [githubUsername]);
 
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query.trim() === "") {
+      setSearchResults(projects);
+      return;
+    }
+
+    const results = projects.filter(
+      (project) =>
+        project.name.toLowerCase().includes(query.toLowerCase()) ||
+        (project.languages &&
+          project.languages
+            .join(" ")
+            .toLowerCase()
+            .includes(query.toLowerCase())) ||
+        (project.description &&
+          project.description.toLowerCase().includes(query.toLowerCase()))
+    );
+
+    setSearchResults(results);
+  };
 
   return (
     <>
       <header className={styles.header}>
-        <h1 className={styles.title}>Portfólio</h1>
+        <div className={styles.searchContainer}>
+          <span className={styles.backForwardIcons}>
+            <img src="https://www.svgrepo.com/show/500472/back.svg" alt="" width={20} />
+            <img src="https://www.svgrepo.com/show/500674/right.svg" alt="" width={20} />
+          </span>
+          <input
+            type="search"
+            placeholder="Procurar no Portfólio"
+            value={searchQuery}
+            onChange={handleSearch}
+            className={styles.searchInput}
+          />
+          <span><img src="https://www.svgrepo.com/show/435530/update.svg" alt="" width={20} /></span>
+        </div>
       </header>
       <main className={styles.main}>
-        <AboutMe
-          name="Ana Carolina Duarte Cavalcante"
-          github="https://github.com/devartes"
-          gitlab="https://gitlab.com/devartes"
-          wordpress="https://anacarolinadc.me/"
-          linkedin="https://www.linkedin.com/in/anacdcavalcante"
-        />
         <h3 className={styles.projectsTitle}>Projetos:</h3>
         <div className={styles.projectContainer}>
-          {projects.map((project, index) => (
-            <div key={index} className={styles.project}>
-              <div className={styles.specification}>
-                <div className={styles.specificationPreview}>
-                  {project.url &&
-                    (project.url.endsWith(".vercel.app") ||
-                      project.url.endsWith(".html") ||
-                      project.url.endsWith(".php")) && (
-                      <button
-                        className={styles.viewProject}
-                        onClick={() => window.open(project.url, "_blank")}
-                      >
-                        <img
-                          src="https://www.svgrepo.com/show/458429/view-alt.svg"
-                          alt="eye icon"
-                          width={25}
-                        />
-                      </button>
-                    )}
-                  <button
-                    className={styles.viewRepo}
-                    onClick={() => window.open(project.repoUrl, "_blank")}
-                  >
-                    <img
-                      src="https://www.svgrepo.com/show/374307/github.svg"
-                      alt="github icon"
-                      width={25}
-                    />
-                  </button>
-                </div>
-                <h4 className={styles.name}>{project.name}</h4>
-                {project.languages && project.languages.length > 0 && (
-                  <div className={styles.languages}>
-                    {project.languages.map((language) => (
-                      <span
-                        key={language}
-                        className={styles.language}
-                        style={{ backgroundColor: languageColors[language] }}
-                      >
-                        {language}
-                      </span>
-                    ))}
+          {(searchQuery.trim() === "" ? projects : searchResults).map(
+            (project, index) => (
+              <div
+                key={index}
+                className={styles.project}
+                style={{
+                  maxWidth: searchQuery.trim() === "" ? "none" : "204px",
+                  minHeight: searchQuery.trim() === "" ? "none" : "204px",
+                }}
+              >
+                <div className={styles.specification}>
+                  <div className={styles.specificationPreview}>
+                    {project.url &&
+                      (project.url.endsWith(".vercel.app") ||
+                        project.url.endsWith(".html") ||
+                        project.url.endsWith(".php")) && (
+                        <button
+                          className={styles.viewProject}
+                          onClick={() => window.open(project.url, "_blank")}
+                        >
+                          <img
+                            src="https://www.svgrepo.com/show/458429/view-alt.svg"
+                            alt="eye icon"
+                            width={25}
+                          />
+                        </button>
+                      )}
+                    <button
+                      className={styles.viewRepo}
+                      onClick={() => window.open(project.repoUrl, "_blank")}
+                    >
+                      <img
+                        src="https://www.svgrepo.com/show/374307/github.svg"
+                        alt="github icon"
+                        width={25}
+                      />
+                    </button>
                   </div>
-                )}
+                  <h4 className={styles.name}>{project.name}</h4>
+                  {project.languages && project.languages.length > 0 && (
+                    <div className={styles.languages}>
+                      {project.languages.map((language) => (
+                        <span
+                          key={language}
+                          className={styles.language}
+                          style={{ backgroundColor: languageColors[language] }}
+                        >
+                          {language}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <p className={styles.description}>{project.description}</p>
               </div>
-              <p className={styles.description}>{project.description}</p>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </main>
-      <footer className={styles.footer}>
-        <p>Feito com 💛 © {year}</p>
-      </footer>
     </>
   );
 };
