@@ -110,36 +110,47 @@ const Main: React.FC<Props> = ({ githubUsername }) => {
           {projects.map((project, index) => (
             <div key={index} className={styles.project}>
               <div className={styles.specification}>
-                <h4 className={styles.name}>{project.name}</h4>
-                {project.url &&
-                  (project.url.endsWith(".vercel.app") ||
-                    project.url.endsWith(".html") ||
-                    project.url.endsWith(".php")) && (
-                    <button
-                      className={styles.viewProject}
-                      onClick={() => window.open(project.url, "_blank")}
-                    >
-                      Visualizar Projeto
-                    </button>
-                  )}
-                <button
-                  className={styles.viewRepo}
-                  onClick={() => window.open(project.repoUrl, "_blank")}
-                >
-                  Visualizar Repositório
-                </button>
-
-                <div className={styles.languages}>
-                  {project.languages?.map((language) => (
-                    <span
-                      key={language}
-                      className={styles.language}
-                      style={{ backgroundColor: languageColors[language] }}
-                    >
-                      {language}
-                    </span>
-                  ))}
+                <div className={styles.specificationPreview}>
+                  {project.url &&
+                    (project.url.endsWith(".vercel.app") ||
+                      project.url.endsWith(".html") ||
+                      project.url.endsWith(".php")) && (
+                      <button
+                        className={styles.viewProject}
+                        onClick={() => window.open(project.url, "_blank")}
+                      >
+                        <img
+                          src="https://www.svgrepo.com/show/458429/view-alt.svg"
+                          alt="eye icon"
+                          width={25}
+                        />
+                      </button>
+                    )}
+                  <button
+                    className={styles.viewRepo}
+                    onClick={() => window.open(project.repoUrl, "_blank")}
+                  >
+                    <img
+                      src="https://www.svgrepo.com/show/374307/github.svg"
+                      alt="github icon"
+                      width={25}
+                    />
+                  </button>
                 </div>
+                <h4 className={styles.name}>{project.name}</h4>
+                {project.languages && project.languages.length > 0 && (
+                  <div className={styles.languages}>
+                    {project.languages.map((language) => (
+                      <span
+                        key={language}
+                        className={styles.language}
+                        style={{ backgroundColor: languageColors[language] }}
+                      >
+                        {language}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
               <p className={styles.description}>{project.description}</p>
             </div>
