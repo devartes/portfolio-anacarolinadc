@@ -116,8 +116,16 @@ const Main: React.FC<Props> = ({ githubUsername }) => {
       <header className={styles.header}>
         <div className={styles.searchContainer}>
           <span className={styles.backForwardIcons}>
-            <img src="https://www.svgrepo.com/show/500472/back.svg" alt="" width={20} />
-            <img src="https://www.svgrepo.com/show/500674/right.svg" alt="" width={20} />
+            <img
+              src="https://www.svgrepo.com/show/500472/back.svg"
+              alt="icon arrow back"
+              width={20}
+            />
+            <img
+              src="https://www.svgrepo.com/show/500674/right.svg"
+              alt="icon arrow right"
+              width={20}
+            />
           </span>
           <input
             type="search"
@@ -126,12 +134,30 @@ const Main: React.FC<Props> = ({ githubUsername }) => {
             onChange={handleSearch}
             className={styles.searchInput}
           />
-          <span><img src="https://www.svgrepo.com/show/435530/update.svg" alt="" width={20} /></span>
+          <span>
+            <img
+              src="https://www.svgrepo.com/show/435530/update.svg"
+              alt="icon update"
+              width={20}
+            />
+          </span>
         </div>
       </header>
       <main className={styles.main}>
         <h3 className={styles.projectsTitle}>Projetos:</h3>
-        <div className={styles.projectContainer}>
+        <div
+          className={styles.projectContainer}
+          style={{
+            display:
+              (searchQuery.trim() === "" ? projects : searchResults).length < 6
+                ? "flex"
+                : "grid",
+            gridTemplateColumns:
+              (searchQuery.trim() === "" ? projects : searchResults).length < 6
+                ? "none"
+                : "repeat(auto-fit, minmax(204px, 1fr))",
+          }}
+        >
           {(searchQuery.trim() === "" ? projects : searchResults).map(
             (project, index) => (
               <div
