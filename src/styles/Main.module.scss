@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -55,11 +54,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 98.9%;
-    
-    & .backForwardIcons{
+    width: 94.5%;
+
+    & .backForwardIcons {
       display: flex;
-    
     }
     & .searchInput {
       border: 0;
@@ -79,6 +77,7 @@ body {
       border: 2px solid $black;
       @media (max-width: 768px) {
         width: 70%;
+        height: 40px;
       }
       &::placeholder {
         font-size: 1.2rem;
@@ -113,8 +112,11 @@ body {
   & .projectContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(204px, 1fr));
-    gap: 0.1rem;
+    grid-auto-flow: row;
+    column-gap: 0.3rem;
+    row-gap: 0.3rem;
     margin-top: 70px;
+
     & .project {
       border: 1px solid $purple-heart;
       padding: 10px;
